@@ -2,42 +2,41 @@ package TP2.Ejercicio_4;
 
 public class Student {
 
-    private String name, lastName, id, studentSection;
+    private String name, lastName, studentSection;
     private boolean isRegistered;
+    private int id;
 
     // Builders
-    public Student(String name, String lastName, String id){
+    public Student(String name, String lastName, int id){
         this.name = name;
         this.lastName = lastName;
         this.id = id;
     }
 
     // Modifiers
-    private void register(){
+    public void register(){
         isRegistered = true;
     }
-    private void unregister(){
+    public void unregister(){
         isRegistered = false;
     }
 
-    private void addStudentSection(String section){
+    public void addStudentSection(String section){
         if (isRegistered){
             studentSection = section;
         }
-        throw new IllegalArgumentException("El estudiante no está registrado");
+        else{throw new IllegalArgumentException("El estudiante no está registrado");}
     }
-    private void deleteStudentSection(){
-        if (!studentSection.isEmpty()){
-            studentSection = "";
-        }
+    public void deleteStudentSection(){
+        studentSection = "";
     }
 
     //Analyzers
-    private String getStudentSection() {
+    public String getStudentSection() {
         return studentSection;
     }
 
-    private String getId() {
+    public int getId() {
         return id;
     }
 
@@ -47,5 +46,9 @@ public class Student {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isRegistered() {
+        return isRegistered;
     }
 }
