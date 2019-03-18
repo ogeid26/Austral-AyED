@@ -20,12 +20,13 @@ public class Student {
         isRegistered = false;
     }
 
-    public void addStudentSection(String section){
+    private void addStudentSection(String section){
         if (isRegistered){
             studentSection = section;
         }
+        throw new IllegalArgumentException("El estudiante no está registrado");
     }
-    public void deleteStudentSection(){
+    private void deleteStudentSection(){
         if (!studentSection.isEmpty()){
             studentSection = "";
         }
@@ -42,5 +43,9 @@ public class Student {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getName() {
+        return name;
     }
 }
