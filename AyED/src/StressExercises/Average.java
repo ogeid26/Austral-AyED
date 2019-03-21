@@ -1,4 +1,4 @@
-package TrabajoClase_13_03;
+package StressExercises;
 
 import java.util.ArrayList;
 import java.util.Iterator;

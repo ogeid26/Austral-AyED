@@ -9,34 +9,52 @@ public class ComplexNumber {
         this.b = b;
     }
 
-    public double getRealPart(){
+    public double re(){
         return a;
     }
-    public double getImaginaryPart(){
+    public double im(){
         return b;
     }
 
-    public ComplexNumber sum(ComplexNumber c1){
-        //Suma el número actual con otro, c1.
-        ComplexNumber returnValue = new ComplexNumber(getRealPart()+c1.getRealPart(), getImaginaryPart()+c1.getImaginaryPart());
-        return returnValue;
+    public void setA(double a) {
+        this.a = a;
     }
 
-    public ComplexNumber substract(ComplexNumber c1){
-        //Resta c1 del número actual.
-        ComplexNumber returnValue = new ComplexNumber(getRealPart()-c1.getRealPart(), getImaginaryPart()-c1.getImaginaryPart());
-        return returnValue;
+    public void setB(double b) {
+        this.b = b;
     }
-    public ComplexNumber product(ComplexNumber c1){
+
+    //Modifiers
+    public void sum(ComplexNumber c1){
+        //Suma el número actual con otro, c1.
+        setA(re()+c1.re());
+        setB(im()+c1.im());
+    }
+
+    public void substract(ComplexNumber c1){
+        //Resta c1 del número actual.
+        setA(re()-c1.re());
+        setB(im()-c1.im());
+    }
+    public void product(ComplexNumber c1){
         //Multiplica el número actual con otro, c1.
-        double a_coef = getRealPart()*c1.getRealPart() - getImaginaryPart()*c1.getImaginaryPart();
-        double b_coef = getRealPart()*c1.getImaginaryPart() + getImaginaryPart()*c1.getRealPart();
-        ComplexNumber returnValue = new ComplexNumber(a_coef, b_coef);
-        return returnValue;
+        setA(( re()*c1.re() ) - ( im()*c1.im()) );
+        setB(( re()*c1.im() ) + ( im()*c1.re()) );
     }
 
     public ComplexNumber quotient(ComplexNumber c1){
-        if (c1.getRealPart() == 0  )
+        if (c1.re() == 0 || c1.im() == 0 ){
+            throw new IllegalArgumentException("Los coeficientes del divisor deben ser distintos a 0");
+        }
+        else{
+            double a_coef = (re()*c1.re() + im()*c1.im())/(Math.pow(c1.re(),2)+Math.pow(c1.im(),2));
+            double b_coef = (im()*c1.re()-re()*c1.im())/((Math.pow(c1.re(),2)+Math.pow(c1.im(),2)));
+            return new ComplexNumber(a_coef, b_coef);
+        }
+    }
+
+    public double modulus(){
+         return Math.sqrt( Math.pow(re(),2) + Math.pow(im(),2) );
     }
 
 
