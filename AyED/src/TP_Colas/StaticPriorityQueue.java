@@ -19,7 +19,6 @@ public class StaticPriorityQueue<T> {
     public  void enqueue(T elem, int lane){
         if (lane <= 0)
             throw new IllegalArgumentException();
-        else if (lane > )
     }
 
     public void dequeue(){
