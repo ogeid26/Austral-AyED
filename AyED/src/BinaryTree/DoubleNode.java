@@ -2,7 +2,7 @@ package BinaryTree;
 
 public class DoubleNode<T> {
 
-     T elem;
+    public T elem;
      DoubleNode<T> right, left;
 
     public DoubleNode(T o){
@@ -15,5 +15,22 @@ public class DoubleNode<T> {
         this.left = left;
     }
 
+    public DoubleNode<T> getLeft() {
+        return left;
+    }
 
+    public DoubleNode<T> getRight() {
+        return right;
+    }
+
+    public void setLeft(DoubleNode<T> left) {
+        this.left = left;
+    }
+    public void setRight(DoubleNode<T> right) {
+        this.right = right;
+    }
+
+    public T getElem() {
+        return elem;
+    }
 }
