@@ -1,8 +1,12 @@
 package TP7_Alpha;
 
+import jdk.dynalink.beans.StaticClass;
+
 import java.nio.DoubleBuffer;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class BinaryTreeAPI<T> {
 
@@ -46,9 +50,20 @@ public class BinaryTreeAPI<T> {
 
     // Num of elements on a given level
 
+    public int getAtLevel(BinaryTree<T> tree, int level){
+
+        if (tree.isEmpty())
+            return 0;
+
+        if ( level == 0)
+            return 1 ;
+
+        return getAtLevel(tree.getLeft(), level-1) + getAtLevel(tree.getRight(), level-1);
+    }
+
     // Tree height.
     public int getHeight(BinaryTree<T> tree){
-        // As i couldn't find any recursive approach ti this, i made an iterative one using queues.
+        // As i couldn't find any recursive approach to this, i made an iterative one using queues.
 
         if (tree.isEmpty())
             return 0;
@@ -74,8 +89,6 @@ public class BinaryTreeAPI<T> {
                 nodeCount--;
             }
         }
-
-
     }
 
 
@@ -99,19 +112,52 @@ public class BinaryTreeAPI<T> {
     // Find the sum of elements divisible by three.
 
     public int getSumIntegerDiv3(BinaryTree<Integer> integerBinaryTree){
+
         if (integerBinaryTree.isEmpty()){
             return 0;
         }
-        if (integerBinaryTree.getRootValue() % 3 == 0){
-            return integerBinaryTree.getRootValue() + getSumIntegerDiv3(integerBinaryTree.getLeft() )+ getSumIntegerDiv3(integerBinaryTree.getRight());
+        else if (integerBinaryTree.getRootValue() % 3 == 0){
+            return integerBinaryTree.getRootValue();
         }
-        return 69;
+        return getSumIntegerDiv3(integerBinaryTree.getLeft()) + getSumIntegerDiv3(integerBinaryTree.getRight() ) ;
     }
 
     // Point B
+
     // Check if two trees are the same
+
+    public boolean areIdentical(BinaryTree<T> t1, BinaryTree<T> t2){
+
+        if (t1.isEmpty() && t2.isEmpty())
+            return false;
+
+        if (t1.isEmpty() || t2.isEmpty())
+            return false;
+
+        if (!t1.isEmpty() && !t2.isEmpty()){
+            return ( t1.getRootValue() == t2.getRootValue() && areIdentical(t1.getLeft(), t2.getLeft())
+            && areIdentical(t1.getRight(), t2.getRight()));
+        }
+        return false;
+    }
+
     // Check if two trees are isomorphic
+
+    public boolean areIsomorphic(BinaryTree<T> tree1, BinaryTree<T> tree2){
+        if ( tree1.isEmpty() && tree2.isEmpty() )
+            return true;
+        if ( tree1.isEmpty() || tree2.isEmpty() )
+            return false;
+        return (areIsomorphic(tree1.getLeft(), tree1.getLeft()) && areIsomorphic(tree1.getRight(), tree2.getRight())
+        || areIsomorphic(tree1.getLeft(), tree2.getRight()) && areIsomorphic(tree1.getRight(), tree2.getLeft()));
+
+    }
     // Check if two trees are similar
+
+    public boolean areSimilar(BinaryTree<T> t1, BinaryTree<T> t2){
+        return true;
+    }
+
     // Check if a tree is complete
 
     public int completeNodes(BinaryTree<T> tree){
@@ -124,10 +170,88 @@ public class BinaryTreeAPI<T> {
         return 1 + completeNodes(tree.getRight()) + completeNodes(tree.getLeft());
     }
     // Check if a tree is full
+
+    public boolean isFull(BinaryTree<T> tree){
+
+        if (tree.isEmpty()){
+            return true;
+        }
+        if(!tree.getLeft().isEmpty() && !tree.getRight().isEmpty()){
+            return true;
+        }
+        else {
+            return isFull(tree);
+        }
+    }
     // Check if a tree is stable
+
+    public boolean isStable(BinaryTree<Double> t){
+
+        if (t.root == null)
+            return true;
+        if (t.getLeft().isEmpty() && t.getRight().isEmpty())
+            return true;
+        if (t.getLeft().getRootValue() < t.getRootValue() && t.getRight().getRootValue() < t.getRootValue())
+            return true;
+        return isStable(t.getLeft()) && isStable(t.getRight() );
+    }
+
     // Check if a tree is a subtree of other tree
+
+    public boolean isSubtree(BinaryTree<T> father, BinaryTree<T> son){
+
+        if (son.isEmpty())
+            return true;
+        if (father.isEmpty())
+            return false;
+        if (areIdentical(father,son))
+            return true;
+        return isSubtree(father.getLeft(), son) || isSubtree(father.getLeft(), son);
+
+
+    }
+
     // Print the frontier (all leaves)
+
+    public void showFrontier(BinaryTree<T> tree){
+
+        if (tree.isEmpty()){
+            return;
+        }
+        if(tree.getLeft().isEmpty() && tree.getRight().isEmpty()){
+            System.out.println(tree.getRootValue());
+        }
+        else {
+            showFrontier(tree.getLeft());
+            showFrontier(tree.getRight());
+
+        }
+
+    }
+
     // Return an Array list of frontier elements.
+
+    public ArrayList<T> frontier(BinaryTree<T> tree){
+
+        ArrayList<T> leaves = new ArrayList<>();
+
+        Stack<DoubleNode<T>> s = new Stack<>();
+        s.push(tree.root);
+
+        while (!s.isEmpty()){
+            DoubleNode<T> node = s.pop();
+
+            if (!tree.getLeft().isEmpty())
+                s.push(tree.getLeft().root);
+
+            if (!tree.getRight().isEmpty())
+                s.push(tree.getRight().root);
+            if (tree.getLeft().isEmpty() && tree.getRight().isEmpty())
+                leaves.add(tree.getRootValue());
+        }
+        return leaves;
+
+    }
 
 
 
@@ -159,4 +283,14 @@ public class BinaryTreeAPI<T> {
     }
 
     // By levels
+
+    public void byLevels(BinaryTree<T> tree) {
+
+        int treeLength = getHeight(tree);
+
+        for (int i = 0; i < treeLength-1; i++) {
+            System.out.println("Level " + i + ":");
+            System.out.println(getAtLevel(tree, i));
+        }
+    }
 }

@@ -1,18 +1,20 @@
 package TP7_Alpha;
 
-public class BinaryTree<T> {
+ class BinaryTree<T> {
 
     public DoubleNode<T> root;
 
     public BinaryTree(){ root = null;}
 
     public BinaryTree(T o){
-        root = new DoubleNode<T>(o);
+        root = new DoubleNode<>(o);
     }
 
     public BinaryTree(T o, BinaryTree<T> tLeft, BinaryTree<T> tRight){
-        root = new DoubleNode<T>(o, tLeft.root, tRight.root);
+        root = new DoubleNode<>(o, tLeft.root, tRight.root);
     }
+
+    public boolean ifFull(){ return !getLeft().isEmpty() && !getRight().isEmpty();}
 
     public boolean isEmpty(){
         return root == null;
