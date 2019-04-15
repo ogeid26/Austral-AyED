@@ -154,20 +154,21 @@ public class BinaryTreeAPI<T> {
     }
     // Check if two trees are similar
 
-    public boolean areSimilar(BinaryTree<T> t1, BinaryTree<T> t2){
-        return true;
+    public boolean areSimilar(BinaryTree<T> tree1, BinaryTree<T> tree2){
+            return false; //TODO
+
     }
 
     // Check if a tree is complete
 
-    public int completeNodes(BinaryTree<T> tree){
+    public boolean completeNodes(BinaryTree<T> tree){
         if (tree.isEmpty())
-            return 0;
+            return true;
         if (tree.getLeft().isEmpty())
             return completeNodes(tree.getRight());
         if (tree.getRight().isEmpty())
             return completeNodes(tree.getLeft());
-        return 1 + completeNodes(tree.getRight()) + completeNodes(tree.getLeft());
+        return completeNodes(tree.getRight()) && completeNodes(tree.getLeft());
     }
     // Check if a tree is full
 
@@ -187,7 +188,7 @@ public class BinaryTreeAPI<T> {
 
     public boolean isStable(BinaryTree<Double> t){
 
-        if (t.root == null)
+        if (t.isEmpty())
             return true;
         if (t.getLeft().isEmpty() && t.getRight().isEmpty())
             return true;
@@ -286,11 +287,29 @@ public class BinaryTreeAPI<T> {
 
     public void byLevels(BinaryTree<T> tree) {
 
-        int treeLength = getHeight(tree);
-
-        for (int i = 0; i < treeLength-1; i++) {
-            System.out.println("Level " + i + ":");
-            System.out.println(getAtLevel(tree, i));
+        int h = getHeight(tree);
+        for (int i = 1; i <= h; i++){
+            byLevelsAux(tree, i);
         }
     }
+
+    public void byLevelsAux(BinaryTree<T> tree, int level){
+        //TODO
+
+        /*
+        if (tree.isEmpty())
+
+            return;
+        if (level == 1)
+            System.out.println(tree.getRootValue());
+        else if (level > 1){
+            byLevelsAux(tree.getLeft(), level-1);
+            byLevelsAux(tree.getRight(), level-1);
+        }
+        */
+    }
+
+
+
+
 }

@@ -115,14 +115,17 @@ class BinaryTreeAPITest {
 
     @Test
     void areSimilar() {
+        assertEquals(false, analyzer.areSimilar(tree, tree_2));
     }
 
     @Test
     void completeNodes() {
+        assertEquals(true, analyzer.completeNodes(tree));
     }
 
     @Test
     void isFull() {
+        assertEquals(true, analyzer.isFull(tree));
     }
 
     @Test
@@ -131,10 +134,12 @@ class BinaryTreeAPITest {
 
     @Test
     void isSubtree() {
+        assertEquals(false, analyzer.isSubtree(tree, tree_2));
     }
 
     @Test
     void showFrontier() {
+        analyzer.showFrontier(tree);
     }
 
     @Test
@@ -143,17 +148,21 @@ class BinaryTreeAPITest {
 
     @Test
     void preorder() {
+        analyzer.preorder(tree);
     }
 
     @Test
     void inorder() {
+        analyzer.inorder(tree);
     }
 
     @Test
     void postorder() {
+        analyzer.postorder(tree);
     }
 
     @Test
     void byLevels() {
+        analyzer.byLevels(tree);
     }
 }
