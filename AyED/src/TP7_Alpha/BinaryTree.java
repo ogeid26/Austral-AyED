@@ -1,6 +1,8 @@
 package TP7_Alpha;
 
- class BinaryTree<T> implements Serializable{
+import java.io.Serializable;
+
+class BinaryTree<T> implements Serializable {
 
     public DoubleNode<T> root;
 

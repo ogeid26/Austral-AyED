@@ -1,7 +1,5 @@
 package TP7_Alpha;
 
-import jdk.dynalink.beans.StaticClass;
-
 import java.nio.DoubleBuffer;
 import java.util.ArrayList;
 import java.util.LinkedList;
