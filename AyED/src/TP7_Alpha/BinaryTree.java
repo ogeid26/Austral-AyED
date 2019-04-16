@@ -1,6 +1,8 @@
 package TP7_Alpha;
 
- class BinaryTree<T> {
+import java.io.Serializable;
+
+class BinaryTree<T> implements Serializable {
 
     public DoubleNode<T> root;
 
@@ -14,7 +16,7 @@ package TP7_Alpha;
         root = new DoubleNode<>(o, tLeft.root, tRight.root);
     }
 
-    public boolean ifFull(){ return !getLeft().isEmpty() && !getRight().isEmpty();}
+    public boolean isFull(){ return !getLeft().isEmpty() && !getRight().isEmpty();}
 
     public boolean isEmpty(){
         return root == null;

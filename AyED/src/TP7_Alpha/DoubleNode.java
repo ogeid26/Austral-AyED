@@ -1,6 +1,8 @@
 package TP7_Alpha;
 
-public class DoubleNode<T> {
+import java.io.Serializable;
+
+public class DoubleNode<T> implements Serializable {
 
      T elem;
      DoubleNode<T> right, left;
