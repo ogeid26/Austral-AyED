@@ -16,7 +16,7 @@ class BinaryTree<T> implements Serializable {
         root = new DoubleNode<>(o, tLeft.root, tRight.root);
     }
 
-    public boolean ifFull(){ return !getLeft().isEmpty() && !getRight().isEmpty();}
+    public boolean isFull(){ return !getLeft().isEmpty() && !getRight().isEmpty();}
 
     public boolean isEmpty(){
         return root == null;
