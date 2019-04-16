@@ -1,6 +1,6 @@
 package TP7_Alpha;
 
- class BinaryTree<T> {
+ class BinaryTree<T> implements Serializable{
 
     public DoubleNode<T> root;
 
