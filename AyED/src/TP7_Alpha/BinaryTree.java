@@ -2,7 +2,7 @@ package TP7_Alpha;
 
 import java.io.Serializable;
 
-class BinaryTree<T> implements Serializable {
+class BinaryTree<T extends Comparable<T>> implements Serializable {
 
     public DoubleNode<T> root;
 

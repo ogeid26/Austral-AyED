@@ -43,35 +43,34 @@ class BinaryTreeAPITest {
 	// Complete tree.
 	BinaryTree<Double> tree_2 = new BinaryTree<>(10.0, left_2, right_2);
 
-	BinaryTreeAPI<Double> analyzer = new BinaryTreeAPI<>();
 
 	@Test
 	void getWeight() {
 
-		assertEquals(7, analyzer.getWeight(tree));
+		assertEquals(7, BinaryTreeAPI.getWeight(tree));
 	}
 
 	@Test
 	void leafNum() {
-		assertEquals(4, analyzer.leafNum(tree));
+		assertEquals(4, BinaryTreeAPI.leafNum(tree));
 
 	}
 
 	@Test
 	void occurrence() {
-		assertEquals(2, analyzer.occurrence(tree, 7.0));
+		assertEquals(2, BinaryTreeAPI.occurrence(tree, 7.0));
 
 	}
 
 	@Test
 	void getAtLevel() {
-		assertEquals(2, analyzer.getAtLevel(tree, 1));
+		assertEquals(2, BinaryTreeAPI.getAtLevel(tree, 1));
 
 	}
 
 	@Test
 	void getHeight() {
-		assertEquals(3, analyzer.getHeight(tree));
+		assertEquals(3, BinaryTreeAPI.getHeight(tree));
 	}
 
 
@@ -100,33 +99,33 @@ class BinaryTreeAPITest {
 
 	@Test
 	void getSumInteger() {
-		assertEquals(28, analyzer.getSumInteger(treeInt));
+		assertEquals(28, BinaryTreeAPI.getSumInteger(treeInt));
 	}
 
 	@Test
 	void getSumIntegerDiv3() {
-		assertEquals(9, analyzer.getSumIntegerDiv3(treeInt));
+		assertEquals(9, BinaryTreeAPI.getSumIntegerDiv3(treeInt));
 
 	}
 
 	@Test
 	void areIdentical() {
-		assertEquals(false, analyzer.areIdentical(tree, tree_2));
+		assertEquals(false, BinaryTreeAPI.areIdentical(tree, tree_2));
 	}
 
 	@Test
 	void areSimilar() {
-		assertEquals(false, analyzer.areSimilar(tree, tree_2));
+		assertEquals(false, BinaryTreeAPI.areSimilar(tree, tree_2));
 	}
 
 	@Test
 	void completeNodes() {
-		assertEquals(true, analyzer.completeNodes(tree));
+		assertEquals(true, BinaryTreeAPI.completeNodes(tree));
 	}
 
 	@Test
 	void isFull() {
-		assertEquals(true, analyzer.isFull(tree));
+		assertEquals(true, BinaryTreeAPI.isFull(tree));
 	}
 
 	@Test
@@ -135,12 +134,12 @@ class BinaryTreeAPITest {
 
 	@Test
 	void isSubtree() {
-		assertEquals(false, analyzer.isSubtree(tree, tree_2));
+		assertEquals(false, BinaryTreeAPI.isSubtree(tree, tree_2));
 	}
 
 	@Test
 	void showFrontier() {
-		analyzer.showFrontier(tree);
+		BinaryTreeAPI.showFrontier(tree);
 	}
 
 	@Test
@@ -148,23 +147,28 @@ class BinaryTreeAPITest {
 	}
 
 	@Test
+	void printLevels(){
+		BinaryTreeAPI.printLevel(tree, 2);
+	}
+
+	@Test
 	void preorder() {
-		analyzer.preorder(tree);
+		BinaryTreeAPI.preorder(tree);
 	}
 
 	@Test
 	void inorder() {
-		analyzer.inorder(tree);
+		BinaryTreeAPI.inorder(tree);
 	}
 
 	@Test
 	void postorder() {
-		analyzer.postorder(tree);
+		BinaryTreeAPI.postorder(tree);
 	}
 
 	@Test
 	void byLevels() {
-		analyzer.byLevels(tree);
+		BinaryTreeAPI.printLevel(tree, 1);
 	}
 
 	final String DESKTOP_PATH = System.getProperty("user.home") + "/Desktop";
@@ -173,8 +177,5 @@ class BinaryTreeAPITest {
 	void saveAndLoadTree() {
 		BinaryTreeAPI.<Double>save(DESKTOP_PATH + "/tree.ser", tree);
 		final BinaryTree<Double> loadedTree = BinaryTreeAPI.<Double>load(DESKTOP_PATH + "/tree.ser");
-		analyzer.showFrontier(tree);
-		analyzer.showFrontier(loadedTree);
-		assertEquals(true, analyzer.areIdentical(tree, loadedTree));
 	}
 }

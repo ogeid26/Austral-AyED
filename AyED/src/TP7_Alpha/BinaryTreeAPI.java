@@ -6,7 +6,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-public class BinaryTreeAPI<T> {
+
+/*
+areSimilar= elements are the same, nodes in different order
+ */
+
+public class BinaryTreeAPI {
 
 	// ADDITIONAL METHODS.
 
@@ -15,7 +20,7 @@ public class BinaryTreeAPI<T> {
 
 	// Tree weight.
 
-	public int getWeight(BinaryTree tree) {
+	public static int getWeight(BinaryTree tree) {
 		if (tree.isEmpty())
 			return 0;
 		return 1 + getWeight(tree.getLeft()) + getWeight(tree.getRight());
@@ -23,7 +28,7 @@ public class BinaryTreeAPI<T> {
 
 	// Leaf num of a tree.
 
-	public int leafNum(BinaryTree<T> tree) {
+	public static int leafNum(BinaryTree<?> tree) {
 		if (tree.isEmpty()) {
 			return 0;
 		}
@@ -36,18 +41,31 @@ public class BinaryTreeAPI<T> {
 	}
 	// Number of occurrences of an element.
 
-	public int occurrence(BinaryTree<T> tree, T element) {
+	public static <T extends Comparable<T>> int occurrence(BinaryTree<T> tree, T element) {
 		if (tree.isEmpty())
 			return 0;
-		if (tree.getRootValue().equals(element))
+		if (tree.getRootValue().compareTo(element) == 0)
 			return 1 + occurrence(tree.getLeft(), element) + occurrence(tree.getRight(), element);
 		else
 			return occurrence(tree.getLeft(), element) + occurrence(tree.getRight(), element);
 	}
 
+
+	//print by levels
+	public static <T extends Comparable<T>> void printLevel(BinaryTree<T> tree, int level) {
+		if (tree.isEmpty()) {
+			return;
+		} else if (level == 0) {
+			System.out.println(tree.getRootValue().toString());
+		} else {
+			printLevel(tree.getLeft(), level - 1);
+			printLevel(tree.getRight(), level - 1);
+		}
+	}
+
 	// Num of elements on a given level
 
-	public int getAtLevel(BinaryTree<T> tree, int level) {
+	public static int getAtLevel(BinaryTree<?> tree, int level) {
 
 		if (tree.isEmpty())
 			return 0;
@@ -59,7 +77,7 @@ public class BinaryTreeAPI<T> {
 	}
 
 	// Tree height.
-	public int getHeight(BinaryTree<T> tree) {
+	public static <T extends Comparable<T>> int getHeight(BinaryTree<T> tree) {
 		// As i couldn't find any recursive approach to this, i made an iterative one using queues.
 
 		if (tree.isEmpty())
@@ -96,7 +114,7 @@ public class BinaryTreeAPI<T> {
 	// Given an integer binary tree:
 	// Find the sum of its elements.
 
-	public int getSumInteger(BinaryTree<Integer> integerBinaryTree) {
+	public static int getSumInteger(BinaryTree<Integer> integerBinaryTree) {
 
 		if (integerBinaryTree.isEmpty()) {
 			return 0;
@@ -108,7 +126,7 @@ public class BinaryTreeAPI<T> {
 
 	// Find the sum of elements divisible by three.
 
-	public int getSumIntegerDiv3(BinaryTree<Integer> integerBinaryTree) {
+	public static int getSumIntegerDiv3(BinaryTree<Integer> integerBinaryTree) {
 
 		if (integerBinaryTree.isEmpty()) {
 			return 0;
@@ -122,14 +140,14 @@ public class BinaryTreeAPI<T> {
 
 	// Check if two trees are the same
 
-	public boolean areIdentical(BinaryTree<T> t1, BinaryTree<T> t2) {
+	public static <T extends Comparable<T>> boolean areIdentical(BinaryTree<T> t1, BinaryTree<T> t2) {
 		return (t1.getRootValue() == t2.getRootValue() && areIdentical(t1.getLeft(), t2.getLeft())
 				&& areIdentical(t1.getRight(), t2.getRight()));
 	}
 
 	// Check if two trees are isomorphic
 
-	public boolean areIsomorphic(BinaryTree<T> tree1, BinaryTree<T> tree2) {
+	public static <T extends Comparable<T>> boolean areIsomorphic(BinaryTree<T> tree1, BinaryTree<T> tree2) {
 		if (tree1.isEmpty() && tree2.isEmpty())
 			return true;
 		if (tree1.isEmpty() || tree2.isEmpty())
@@ -140,14 +158,21 @@ public class BinaryTreeAPI<T> {
 	}
 	// Check if two trees are similar
 
-	public boolean areSimilar(BinaryTree<T> tree1, BinaryTree<T> tree2) {
-		return false; //TODO
+	public static <T extends Comparable<T>> boolean areSimilar(BinaryTree<T> tree1, BinaryTree<T> tree2) {
+		if (!tree1.isEmpty() && !tree2.isEmpty()) {
+			if (occurrence(tree1, tree2.getRootValue()) == occurrence(tree2, tree1.getRootValue())) {
+				return (areSimilar(tree1.getLeft(), tree2.getLeft()) || areSimilar(tree1.getLeft(), tree2.getRight()))
+						&& (areSimilar(tree1.getRight(), tree2.getLeft()) || areSimilar(tree1.getLeft(), tree2.getLeft()));
+			}
+		}
+
+		return false;
 
 	}
 
 	// Check if a tree is complete
 
-	public boolean completeNodes(BinaryTree<T> tree) {
+	public static <T extends Comparable<T>> boolean completeNodes(BinaryTree<T> tree) {
 		if (tree.isEmpty())
 			return true;
 		if (tree.getLeft().isEmpty())
@@ -158,7 +183,7 @@ public class BinaryTreeAPI<T> {
 	}
 	// Check if a tree is full
 
-	public boolean isFull(BinaryTree<T> tree) {
+	public static <T extends Comparable<T>> boolean isFull(BinaryTree<T> tree) {
 
 		if (tree.isEmpty()) {
 			return true;
@@ -171,7 +196,7 @@ public class BinaryTreeAPI<T> {
 	}
 	// Check if a tree is stable
 
-	public boolean isStable(BinaryTree<Double> t) {
+	public static <T extends Comparable<T>> boolean isStable(BinaryTree<Double> t) {
 
 		if (t.isEmpty())
 			return true;
@@ -184,7 +209,7 @@ public class BinaryTreeAPI<T> {
 
 	// Check if a tree is a subtree of other tree
 
-	public boolean isSubtree(BinaryTree<T> father, BinaryTree<T> son) {
+	public static <T extends Comparable<T>> boolean isSubtree(BinaryTree<T> father, BinaryTree<T> son) {
 
 		if (son.isEmpty())
 			return true;
@@ -199,7 +224,7 @@ public class BinaryTreeAPI<T> {
 
 	// Print the frontier (all leaves)
 
-	public void showFrontier(BinaryTree<T> tree) {
+	public static <T extends Comparable<T>> void showFrontier(BinaryTree<T> tree) {
 
 		if (tree.isEmpty()) {
 			return;
@@ -216,7 +241,7 @@ public class BinaryTreeAPI<T> {
 
 	// Return an Array list of frontier elements.
 
-	public ArrayList<T> frontier(BinaryTree<T> tree) {
+	public static <T extends Comparable<T>> ArrayList<T> frontier(BinaryTree<T> tree) {
 
 		ArrayList<T> leaves = new ArrayList<>();
 
@@ -242,7 +267,7 @@ public class BinaryTreeAPI<T> {
 	// Traverse trees:
 	// ________________________________________________________________________________________
 	// Pre-order
-	public void preorder(BinaryTree<T> tree) {
+	public static <T extends Comparable<T>> void preorder(BinaryTree<T> tree) {
 		if (!tree.isEmpty()) {
 			System.out.println(tree.getRootValue());
 			inorder((tree.getLeft()));
@@ -251,7 +276,7 @@ public class BinaryTreeAPI<T> {
 	}
 
 	// Inorder
-	public void inorder(BinaryTree<T> tree) {
+	public static <T extends Comparable<T>> void inorder(BinaryTree<T> tree) {
 		if (!tree.isEmpty()) {
 			inorder((tree.getLeft()));
 			System.out.println(tree.getRootValue());
@@ -260,38 +285,12 @@ public class BinaryTreeAPI<T> {
 	}
 
 	// Post-order
-	public void postorder(BinaryTree<T> tree) {
+	public static <T extends Comparable<T>> void postorder(BinaryTree<T> tree) {
 		if (!tree.isEmpty()) {
 			inorder((tree.getLeft()));
 			inorder(tree.getRight());
 			System.out.println(tree.getRootValue());
 		}
-	}
-
-	// By levels
-
-	public void byLevels(BinaryTree<T> tree) {
-
-		int h = getHeight(tree);
-		for (int i = 1; i <= h; i++) {
-			byLevelsAux(tree, i);
-		}
-	}
-
-	public void byLevelsAux(BinaryTree<T> tree, int level) {
-		//TODO
-
-        /*
-        if (tree.isEmpty())
-
-            return;
-        if (level == 1)
-            System.out.println(tree.getRootValue());
-        else if (level > 1){
-            byLevelsAux(tree.getLeft(), level-1);
-            byLevelsAux(tree.getRight(), level-1);
-        }
-        */
 	}
 
 
@@ -313,7 +312,7 @@ public class BinaryTreeAPI<T> {
 	Load binary tree from disk
 	 */
 
-	public static <T> BinaryTree<T> load(String filePath) {
+	public static <T extends Comparable<T>> BinaryTree<T> load(String filePath) {
 		try (FileInputStream fileInputStream = new FileInputStream(filePath)) {
 			final ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 			final BinaryTree<T> loadedTree = (BinaryTree<T>) objectInputStream.readObject();

@@ -2,7 +2,7 @@ package TP7_Alpha;
 
 import java.io.Serializable;
 
-public class DoubleNode<T> implements Serializable {
+public class DoubleNode<T extends Comparable<T>> implements Serializable {
 
      T elem;
      DoubleNode<T> right, left;
