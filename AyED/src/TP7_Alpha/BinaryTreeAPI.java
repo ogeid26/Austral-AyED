@@ -123,13 +123,6 @@ public class BinaryTreeAPI<T> {
 	// Check if two trees are the same
 
 	public boolean areIdentical(BinaryTree<T> t1, BinaryTree<T> t2) {
-
-		if (t1.isEmpty() && t2.isEmpty())
-			return true;
-
-		if (t1.isEmpty() || t2.isEmpty())
-			return false;
-
 		return (t1.getRootValue() == t2.getRootValue() && areIdentical(t1.getLeft(), t2.getLeft())
 				&& areIdentical(t1.getRight(), t2.getRight()));
 	}

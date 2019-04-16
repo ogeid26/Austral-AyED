@@ -173,6 +173,8 @@ class BinaryTreeAPITest {
 	void saveAndLoadTree() {
 		BinaryTreeAPI.<Double>save(DESKTOP_PATH + "/tree.ser", tree);
 		final BinaryTree<Double> loadedTree = BinaryTreeAPI.<Double>load(DESKTOP_PATH + "/tree.ser");
+		analyzer.showFrontier(tree);
+		analyzer.showFrontier(loadedTree);
 		assertEquals(true, analyzer.areIdentical(tree, loadedTree));
 	}
 }
