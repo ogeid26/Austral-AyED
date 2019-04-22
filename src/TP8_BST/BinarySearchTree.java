@@ -1,6 +1,6 @@
 package TP8_BST;
 
-public class BinarySearchTree<T extends Node> {
+public class BinarySearchTree<R extends Comparable<R>, T extends Node<R>> {
 
 	private T root;
 
@@ -16,27 +16,52 @@ public class BinarySearchTree<T extends Node> {
 		return root;
 	}
 
-
 	public T insert(T node) {
-		if (root == null) {
-			return this.root = node;
-		}
-		return insert(node, this.root);
+		return this.root = insert(node, this.root);
 	}
 
 	private T insert(T node, T root) {
-		//Node is greater than or equal to root
-		if (node.compareTo(root) >= 0) {
-			if (root.getRightChild() == null) {
-				root.setRightChild(node);
-				return node;
-			}
-			return insert(node, (T) root.getRightChild());
-		} else if (root.getLeftChild() == null) {
-			root.setLeftChild(node);
+		if (root == null) {
 			return node;
+		} else if (node.compareTo(root) > 0) {
+			//Node is greater than root => right child
+			root.rightChild = insert(node, (T) root.rightChild);
+		} else if (node.compareTo(root) < 0) {
+			//Node is less than to root => left child
+			root.leftChild = insert(node, (T) root.leftChild);
 		}
-		return insert(node, (T) root.getLeftChild());
+		return root; //equal
+	}
+
+	public void remove(R element) {
+		this.root = remove(element, this.root);
+	}
+
+	private T remove(R element, T root) {
+		if (root == null) {
+			return null;
+		} else if (root.element.compareTo(element) > 0) {
+			return remove(element, (T) root.leftChild);
+		} else if (root.element.compareTo(element) < 0) {
+			return remove(element, (T) root.rightChild);
+		} else { //equal
+			return null;
+		}
+	}
+
+	public T search(R element) {
+		return search(element, this.root);
+	}
+
+	public T search(R element, T root) {
+		if (root == null) {
+			return null;
+		} else if (root.element.compareTo(element) > 0) {
+			return search(element, (T) root.leftChild);
+		} else if (root.element.compareTo(element) < 0) {
+			return search(element, (T) root.rightChild);
+		}
+		return root;
 	}
 
 }
