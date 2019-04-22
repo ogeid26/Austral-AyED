@@ -3,9 +3,9 @@ package Interfaces;
 public interface BinaryTree <T>
 {
 	/*
-	public BinaryTree();
-	public BinaryTree(T o);
-	public BinaryTree(T o, BinaryTree<T> tleft, BinaryTree<T> tright);
+	public BinarySearchTree();
+	public BinarySearchTree(T o);
+	public BinarySearchTree(T o, BinarySearchTree<T> tleft, BinarySearchTree<T> tright);
 	 */
 	public boolean isEmpty();
 	public T getRoot();
