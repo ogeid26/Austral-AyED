@@ -64,4 +64,17 @@ public class BinarySearchTree<R extends Comparable<R>, T extends Node<R>> {
 		return root;
 	}
 
+	public void print() {
+		print(this.root, 0);
+	}
+
+	private void print(T root, int level) {
+		if (root == null) {
+			return;
+		}
+		System.out.println("Level [" + level + "]: " + root.toString());
+		print((T) root.rightChild, level + 1);
+		print((T) root.leftChild, level + 1);
+	}
+
 }

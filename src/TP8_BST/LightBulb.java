@@ -25,9 +25,16 @@ public class LightBulb implements Comparable<LightBulb> {
 	}
 
 	@Override
+	public String toString() {
+		return "LightBulb{" +
+				"code='" + code + '\'' +
+				", watts=" + watts +
+				", type='" + type + '\'' +
+				'}';
+	}
+
+	@Override
 	public int compareTo(final LightBulb o) {
-		int comparisonSum = code.compareTo(o.getCode()) + watts.compareTo(o.getWatts()) + type.compareTo(o.getType());
-		System.out.println(comparisonSum);
-		return comparisonSum;
+		return code.compareTo(o.getCode());
 	}
 }
