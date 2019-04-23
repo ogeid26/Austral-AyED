@@ -1,12 +1,8 @@
 package TP7_Alpha;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
-
-public class BinaryTreeAPI<T> {
+import java.util.*;
+ class BinaryTreeAPI<T> {
 
 	// ADDITIONAL METHODS.
 
@@ -15,15 +11,14 @@ public class BinaryTreeAPI<T> {
 
 	// Tree weight.
 
-	public int getWeight(BinaryTree tree) {
+	int getWeight(BinaryTree tree) {
 		if (tree.isEmpty())
 			return 0;
 		return 1 + getWeight(tree.getLeft()) + getWeight(tree.getRight());
 	}
 
 	// Leaf num of a tree.
-
-	public int leafNum(BinaryTree<T> tree) {
+	int leafNum(BinaryTree<T> tree) {
 		if (tree.isEmpty()) {
 			return 0;
 		}
@@ -36,7 +31,7 @@ public class BinaryTreeAPI<T> {
 	}
 	// Number of occurrences of an element.
 
-	public int occurrence(BinaryTree<T> tree, T element) {
+	int occurrence(BinaryTree<T> tree, T element) {
 		if (tree.isEmpty())
 			return 0;
 		if (tree.getRootValue().equals(element))
@@ -47,7 +42,7 @@ public class BinaryTreeAPI<T> {
 
 	// Num of elements on a given level
 
-	public int getAtLevel(BinaryTree<T> tree, int level) {
+	int getAtLevel(BinaryTree<T> tree, int level) {
 
 		if (tree.isEmpty())
 			return 0;
@@ -59,7 +54,7 @@ public class BinaryTreeAPI<T> {
 	}
 
 	// Tree height.
-	public int getHeight(BinaryTree<T> tree) {
+	int getHeight(BinaryTree<T> tree) {
 		// As i couldn't find any recursive approach to this, i made an iterative one using queues.
 
 		if (tree.isEmpty())
@@ -181,10 +176,21 @@ public class BinaryTreeAPI<T> {
 			return true;
 		return isStable(t.getLeft()) && isStable(t.getRight());
 	}
+	boolean isStableG(BinaryTree<T> t, Comparator<T> comparator){
+
+		if (t.isEmpty())
+			return true;
+		if (t.getLeft().isEmpty() && t.getRight().isEmpty())
+			return true;
+		if (comparator.compare(t.getLeft().getRootValue(), t.getRootValue()) < 0 && comparator.compare(t.getRight().getRootValue(),t.getRootValue()) < 0 )
+			return true;
+		return isStableG(t.getLeft(),comparator) && isStableG(t.getRight(), comparator);
+	}
+
 
 	// Check if a tree is a subtree of other tree
 
-	public boolean isSubtree(BinaryTree<T> father, BinaryTree<T> son) {
+	boolean isSubtree(BinaryTree<T> father, BinaryTree<T> son) {
 
 		if (son.isEmpty())
 			return true;
@@ -199,7 +205,7 @@ public class BinaryTreeAPI<T> {
 
 	// Print the frontier (all leaves)
 
-	public void showFrontier(BinaryTree<T> tree) {
+	void showFrontier(BinaryTree<T> tree) {
 
 		if (tree.isEmpty()) {
 			return;
@@ -216,7 +222,7 @@ public class BinaryTreeAPI<T> {
 
 	// Return an Array list of frontier elements.
 
-	public ArrayList<T> frontier(BinaryTree<T> tree) {
+	 ArrayList<T> frontier(BinaryTree<T> tree) {
 
 		ArrayList<T> leaves = new ArrayList<>();
 
@@ -242,7 +248,7 @@ public class BinaryTreeAPI<T> {
 	// Traverse trees:
 	// ________________________________________________________________________________________
 	// Pre-order
-	public void preorder(BinaryTree<T> tree) {
+	void preorder(BinaryTree<T> tree) {
 		if (!tree.isEmpty()) {
 			System.out.println(tree.getRootValue());
 			inorder((tree.getLeft()));
@@ -251,7 +257,7 @@ public class BinaryTreeAPI<T> {
 	}
 
 	// Inorder
-	public void inorder(BinaryTree<T> tree) {
+	void inorder(BinaryTree<T> tree) {
 		if (!tree.isEmpty()) {
 			inorder((tree.getLeft()));
 			System.out.println(tree.getRootValue());
@@ -272,32 +278,7 @@ public class BinaryTreeAPI<T> {
 
 	public void byLevels(BinaryTree<T> tree) {
 
-		int h = getHeight(tree);
-		for (int i = 1; i <= h; i++) {
-			byLevelsAux(tree, i);
-		}
 	}
-
-	public void byLevelsAux(BinaryTree<T> tree, int level) {
-		//TODO
-
-        /*
-        if (tree.isEmpty())
-
-            return;
-        if (level == 1)
-            System.out.println(tree.getRootValue());
-        else if (level > 1){
-            byLevelsAux(tree.getLeft(), level-1);
-            byLevelsAux(tree.getRight(), level-1);
-        }
-        */
-	}
-
-
-    /*
-    Save binary tree to disk
-     */
 
 	public static void save(String filePath, BinaryTree<?> tree) {
 		try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {

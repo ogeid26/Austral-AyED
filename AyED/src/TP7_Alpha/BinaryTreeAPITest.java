@@ -2,6 +2,9 @@ package TP7_Alpha;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BinaryTreeAPITest {
@@ -131,6 +134,7 @@ class BinaryTreeAPITest {
 
 	@Test
 	void isStable() {
+		assertEquals(true, analyzer.isStable(tree));
 	}
 
 	@Test
@@ -145,6 +149,11 @@ class BinaryTreeAPITest {
 
 	@Test
 	void frontier() {
+		List<Double> array  = new ArrayList<>();
+
+		array = analyzer.frontier(tree);
+
+
 	}
 
 	@Test
