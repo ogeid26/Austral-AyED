@@ -2,7 +2,7 @@ package TP8_BST;
 
 public class LightBulbNode extends Node<LightBulb> {
 
-	private int stock;
+	private Integer stock;
 
 	public LightBulbNode(final LightBulb element, int stock) {
 		super(element);
@@ -20,5 +20,10 @@ public class LightBulbNode extends Node<LightBulb> {
 
 	public void setStock(final int stock) {
 		this.stock = stock;
+	}
+
+	@Override
+	public String toString() {
+		return element != null ? element.toString() + "; Stock=" + this.stock.toString() : "NULL";
 	}
 }
